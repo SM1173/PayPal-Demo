@@ -1,0 +1,48 @@
+﻿@model MvcApplication1.ViewModels.PaypalViewModel
+@{
+    ViewBag.Title = "PayPal Payment Test";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+
+        </div>
+    </section>
+}
+
+@using (Html.BeginForm())
+{
+
+
+    <fieldset>
+        <legend>Payment Method</legend>
+
+        @Html.Label("paypal-true", "Pay with PayPal") @Html.RadioButtonFor(Model => Model.IsPayPalPayment, true, new { id = "paypal-true" })
+        
+        @Html.Label("paypal-false", "Pay with card") @Html.RadioButtonFor(e => e.IsPayPalPayment, false, new { id = "paypal-false" })
+    </fieldset>
+
+    
+    @Html.Label("Amount")
+    @*@Html.EditorFor(model => model.PayPalPayment.payment_instruction.amount.value)*@
+    @Html.EditorFor(model => model.Amount)
+
+    <input type="submit" value="Make Payment" />
+}    
+    
+
+@*@Html.ActionLink("Pay with card", "CardPayment", "Paypal")
+@Html.ActionLink("Pay with Paypal", "PaypalPayment", "Paypal")
+
+<input type="image" src="@Url.Content("~/Images/btn_buynow_cc_171x47.png")" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+    <input type="hidden" name="cmd" value="_s-xclick">
+    <input type="hidden" name="hosted_button_id" value="EMHQQUGU2YB2W">
+    <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/btn/btn_buynow_cc_171x47.png" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+    
+</form>*@

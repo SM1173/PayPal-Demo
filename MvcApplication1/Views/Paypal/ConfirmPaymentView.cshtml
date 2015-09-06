@@ -1,0 +1,34 @@
+﻿@model MvcApplication1.ViewModels.PaypalViewModel
+
+@{
+    ViewBag.Title = "ConfirmPaymentView";
+    ViewBag.Model = Model;
+}
+
+<h2>ConfirmPaymentView</h2>
+
+Please confirm you wish to make the following payment:
+
+
+@if (@Model.IsPayPalPayment)
+{
+
+}
+else
+{
+    <p>Amount you are sending: £@Model.Amount.ToString("#,##0.00") </p>
+    <p>Using card ending *@Model.PayPalPayment.payer.funding_instruments[0].credit_card.number.Substring(11,4) </p>
+}
+
+
+@using (Html.BeginForm("ConfirmPaymentView", "Paypal", FormMethod.Post))
+{
+    
+    
+    @Html.HiddenFor(model => model.PayPalPayment)
+    @Html.HiddenFor(model => model.Amount)
+
+    <input type="submit" value="Confirm Payment"  />
+
+}
+

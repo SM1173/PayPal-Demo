@@ -1,0 +1,44 @@
+﻿@model MvcApplication1.ViewModels.PaypalViewModel
+
+@using Newtonsoft.Json
+
+@{
+    ViewBag.Title = "SuccessView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thank You! Your payment was successful</h2>
+
+<p>You have sent: £@Model.Amount.ToString("#,##0.00") </p>
+
+
+
+<p>Invoice Id: @Model.TransactionGuid
+    </p>
+
+
+<p>
+    ***** Getting back this error when using code generated invoice number *****
+</p>
+<p>
+    //{"name":"BUSINESS_ERROR","message":"Invalid encrypted id.","debug_id":"8b3f27ecb634d"}
+</p>
+<p>
+    //so hard code invoiceId from PayPal example ("INV2-W6VG-MFK4-HQRT-RS6Z") to show workflow
+</p>
+
+
+<br/>
+<p>@if (@Model.ErrMessage != null)
+   {
+    @Model.ErrMessage;
+   }
+    </p>
+
+<pre>
+
+@Html.Raw(JsonConvert.SerializeObject(@Model.PayPalInvoice, Formatting.Indented))
+  
+</pre>
+
+

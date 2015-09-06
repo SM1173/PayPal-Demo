@@ -1,0 +1,15 @@
+﻿@model MvcApplication1.ViewModels.PaypalViewModel
+
+@using Newtonsoft.Json
+
+@{
+    ViewBag.Title = "FailureView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>There has been a problem taking your payment</h2>
+
+<pre>
+@Html.Raw(JsonConvert.SerializeObject(@Model.PayPal_Exception.Message, Formatting.Indented))
+  
+</pre>
